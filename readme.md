@@ -20,7 +20,7 @@ The data was then tested aganst a Neural Network and later a other tests learned
 - [Turn-in CSV File](https://github.com/btobin0/case2/blob/master/Case2PredictionsTobin%20Salary.csv) - This is the same file as the AllData3.csv file but was not used for the assignment. This is for grading purposes only.
 - [Assignment Document](https://github.com/btobin0/case2/blob/master/CaseStudy2.docx) - The project instructions instructions file. This was used as the guidline of what the customer wanted investigated.
 - [knitted HTML File](https://github.com/btobin0/case2/blob/master/Case2PredictionsTobin-Salary.html) - Assignment required a knitted html file.
-- [Presentation PPT] (https://github.com/btobin0/case2/blob/master/Case2-Presentation-BTobin.pptx) - File used for presentation video recording
+- [Presentation PPT](https://github.com/btobin0/case2/blob/master/Case2-Presentation-BTobin.pptx) - File used for presentation video recording
 
 ## Files that were downloaded but not used after data was merged
 
