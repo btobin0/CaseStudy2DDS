@@ -1,3 +1,0 @@
-"0","#dfa3 <- dfa2 %>% separate(JobRole, "
-"0","#                c(""Job"", ""Role""))"
-"0","#write.csv(dfa3,""C:/Users/btobin/Documents/case2/AllData3.csv"")"

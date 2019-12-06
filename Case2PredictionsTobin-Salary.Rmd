@@ -1,5 +1,5 @@
 ---
-title: "scratch3"
+title: "Attrition Investigation"
 author: "Brian Tobin"
 date: "December 2, 2019"
 output: html_document
@@ -30,79 +30,79 @@ library(naivebayes)
 library(e1071)
 ```
 
-```{r}
-list.files()
-```
+#```{r}
+#list.files()
+#```
 
-```{r}
+#```{r}
 #df1<-read.csv("CaseStudy2CompSetNoAttrition.csv",head=T)
 #head(df1)
 #df2<-read.csv("CaseStudy2CompSetNoSalary.csv",head=T)
-#head(df2)
-```
-
-```{r}
-#dim(df1)
-#dim(df2)
-#str(df1)
-#str(df2)
-```
-
-```{r}
-#df1$Attrition <-0
-#str(df1)
-#head(df1)
-#dim(df1)
-```
-
-```{r}
-#df2$Salary <-0
-#str(df2)
-#head(df2)
-#dim(df2)
-```
-
-```{r}
-#AllData <-merge(df2,df1, all.x=TRUE, all.y=TRUE)
-#dim(AllData)
-#head(AllData)
-#tail(AllData)
-```
-
-```{r}
-#write.csv(AllData,"C:/Users/btobin/Documents/case2/AllData.csv")
-```
-
-```{r}
-#dfa<-read.csv("AllData.csv",head=T)
-#dim(dfa)
-#head(dfa)
-#tail(dfa)
-```
-
-```{r}
-#dfa$Salary <- NULL
-#head(dfa)
-```
-
-```{r}
-#dfa$Salary <- dfa$MonthlyRate * 12
-#head(dfa)
-```
-
-```{r}
-#dfa2 <- dfa %>% separate(BusinessTravel, 
-#                c("Travel", "Frequency"))
-#write.csv(dfa2,"C:/Users/btobin/Documents/case2/AllData2.csv")
-
-```
-
-```{r}
-#dfa3 <- dfa2 %>% separate(JobRole, 
-#                c("Job", "Role"))
-#write.csv(dfa3,"C:/Users/btobin/Documents/case2/AllData3.csv")
-
-```
+##head(df2)
+#```
+#
+#```{r}
+##dim(df1)
+##dim(df2)
+##str(df1)
+##str(df2)
+#```
+#
+#```{r}
+##df1$Attrition <-0
+##str(df1)
+##head(df1)
+##dim(df1)
+#```
+#
+#```{r}
+##df2$Salary <-0
+##str(df2)
+##head(df2)
+##dim(df2)
+#```
+#
+#```{r}
+##AllData <-merge(df2,df1, all.x=TRUE, all.y=TRUE)
+##dim(AllData)
+##head(AllData)
+##tail(AllData)
+#```
+#
+#```{r}
+##write.csv(AllData,"C:/Users/btobin/Documents/case2/AllData.csv")
+#```
+#
+#```{r}
+##dfa<-read.csv("AllData.csv",head=T)
+##dim(dfa)
+##head(dfa)
+##tail(dfa)
+#```
+#
+#```{r}
+##dfa$Salary <- NULL
+##head(dfa)
+#```
+#
+#```{r}
+##dfa$Salary <- dfa$MonthlyRate * 12
+##head(dfa)
+#```
+#
+#```{r}
+##dfa2 <- dfa %>% separate(BusinessTravel, 
+##                c("Travel", "Frequency"))
+##write.csv(dfa2,"C:/Users/btobin/Documents/case2/AllData2.csv")
+#
+#```
+#
+#```{r}
+##dfa3 <- dfa2 %>% separate(JobRole, 
+##                c("Job", "Role"))
+##write.csv(dfa3,"C:/Users/btobin/Documents/case2/AllData3.csv")
+#
+#```
 
 ```{r}
 FinalDF<-read.csv("AllData3.csv",head=T)
@@ -170,7 +170,7 @@ ggplot(FinalDF, aes(Role,YearsSinceLastPromotion))+
 ```{r}
 ggplot(FinalDF, aes(Role,YearsAtCompany))+
   ggtitle("Years in Current Role vs Job Satisfaction")+
-  geom_point(aes(color=Job_Satisfaction))+
+  geom_point(aes(color=JobSatisfaction))+
   scale_color_viridis(option="D")
 
 ```
@@ -178,13 +178,13 @@ ggplot(FinalDF, aes(Role,YearsAtCompany))+
 ```{r}
 ggplot(FinalDF, aes(Gender,Role))+
   ggtitle("Average Gender vs Role via Job Satisfaction")+
-  geom_point(aes(color=Job_Satisfaction))+
+  geom_point(aes(color=JobSatisfaction))+
   scale_color_viridis(option="D")
 
 ```
 
 ```{r}
-ggplot(FinalDF, aes(Gender,Job_Satisfaction))+
+ggplot(FinalDF, aes(Gender,JobSatisfaction))+
   ggtitle("Average Gender vs Job Satisfaction via Salary")+
   geom_point(aes(color=Salary))+
   scale_color_viridis(option="D")

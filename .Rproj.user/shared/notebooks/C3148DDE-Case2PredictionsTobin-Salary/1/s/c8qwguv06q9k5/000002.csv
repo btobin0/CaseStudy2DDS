@@ -1,4 +1,0 @@
-"0","#AllData <-merge(df2,df1, all.x=TRUE, all.y=TRUE)"
-"0","#dim(AllData)"
-"0","#head(AllData)"
-"0","#tail(AllData)"

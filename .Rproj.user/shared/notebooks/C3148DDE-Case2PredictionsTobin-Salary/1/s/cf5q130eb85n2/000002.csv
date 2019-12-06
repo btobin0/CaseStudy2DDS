@@ -1,4 +1,0 @@
-"0","ggplot(FinalDF, aes(Age,YearsAtCompany))+"
-"0","  geom_point(aes(color=YearsSinceLastPromotion))+"
-"0","  geom_smooth(aes(color=YearsSinceLastPromotion,fill=YearsSinceLastPromotion), method =""lm"")+"
-"0","  scale_color_viridis(option=""D"")"
