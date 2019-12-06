@@ -30,5 +30,5 @@ The data was then tested aganst a Neural Network and later a other tests learned
 - [NoSalary File XLS](https://github.com/btobin0/case2/blob/master/CaseStudy2CompSetNoSalary.xlsx) - This is the original NoSalaryFile.
 
 ## Please Give Constructive Feedback. 
-### I only get better with guidence. Any code suggestions, please provide snippet or 
+### I only get better with guidence. Any code suggestions, please provide snippet or link to example to read.
 
