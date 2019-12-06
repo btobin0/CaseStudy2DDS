@@ -1,0 +1,100 @@
+---
+title: "Unit-7"
+author: "Brian Tobin"
+date: "October 5, 2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "C:/Users/btobin/Documents/Unit7")
+```
+
+## R Markdown
+
+```{r directory}
+getwd()
+list.files()
+```
+
+```{r library 1}
+
+#tools library
+library(e1071)
+library(tidyverse)
+library(dplyr)
+```
+
+```{r load csv}
+titanic <- read.csv(file="titanic.csv", header=TRUE, sep=",")
+head(titanic)
+```
+
+```{r clean with seed 4}
+titanicClean = titanic %>% filter(!is.na(Age) & !is.na(Pclass))
+set.seed(4)
+trainIndices = sample(seq(1:length(titanicClean$Age)),round(.7*length(titanicClean$Age)))
+trainTitanic = titanicClean[trainIndices,]
+testTitanic = titanicClean[-trainIndices,]
+
+```
+
+```{r head train data}
+head(trainTitanic)
+
+```
+
+```{r head test data}
+head(testTitanic)
+
+```
+
+```{r}
+table(trainTitanic$Sex) %>% prop.table()
+```
+
+```{r}
+table(testTitanic$Sex) %>% prop.table()
+```
+
+```{r}
+library(ggplot2)
+testTitanic %>% 
+  select(Pclass,Age) %>% 
+  gather(metric, value) %>% 
+  ggplot(aes(value, fill = metric)) + 
+  geom_density(show.legend = FALSE) + 
+  facet_wrap(~ metric, scales = "free")
+```
+
+```{r}
+library(e1071)
+
+model <- naiveBayes(Survived ~ ., data = testTitanic)
+predict(model,testTitanic,type="raw")
+```
+
+```{r predict model by class age and survival}
+
+model <- naiveBayes(testTitanic$Age,testTitanic$Pclass,Survived ~ ., data = testTitanic)
+head(predict(model,testTitanic,type="raw"))
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

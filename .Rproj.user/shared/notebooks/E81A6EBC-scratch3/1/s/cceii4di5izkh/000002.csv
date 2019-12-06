@@ -1,0 +1,4 @@
+"0","#df1<-read.csv(""CaseStudy2CompSetNoAttrition.csv"",head=T)"
+"0","#head(df1)"
+"0","#df2<-read.csv(""CaseStudy2CompSetNoSalary.csv"",head=T)"
+"0","#head(df2)"

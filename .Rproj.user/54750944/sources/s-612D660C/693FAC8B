@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1574114221266.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "693FAC8B",
+    "lastKnownWriteTime" : 1574289442,
+    "last_content_update" : 1574289442,
+    "path" : "~/Unit7/Brian-Tobin-Unit-7-Scratch.Rmd",
+    "project_path" : null,
+    "properties" : {
+        "cursorPosition" : "74,0",
+        "last_setup_crc32" : "",
+        "scrollLine" : "60"
+    },
+    "relative_order" : 4,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

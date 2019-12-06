@@ -1,0 +1,6 @@
+"0","q4 %>% "
+"0","  filter(median_abv == max(median_abv, na.rm = T)) %>% "
+"0","  select(-median_ibu) %>%"
+"0","  kable(format=""html"", align=""lc"", digits=2, "
+"0","        col.names=c(""State"", ""Median ABV"")) %>%"
+"0","  kable_styling(full_width = F)"

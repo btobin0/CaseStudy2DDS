@@ -1,0 +1,3 @@
+"0","beer <- beer %>% select(Name,Beer_ID,ABV,IBU,Style,Ounces,Brewery_ID)"
+"0","df <- merge(beer,brewery, by='Brewery_ID')"
+"0","head(df)"

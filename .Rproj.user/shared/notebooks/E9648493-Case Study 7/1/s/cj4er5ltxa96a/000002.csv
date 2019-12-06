@@ -1,0 +1,4 @@
+"0","MaxByState <- as.data.frame(nbd "
+"0","							  %>% group_by(State) "
+"0","							  %>% summarise(NumBreweries = n_distinct(Brewery_ID)))"
+"0","head(MaxByState)"

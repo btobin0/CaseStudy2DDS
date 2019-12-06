@@ -1,0 +1,5 @@
+"0","ggplot(q1, aes(reorder(State, -Count), Count, fill = State)) +"
+"0","  geom_bar(stat = ""identity"", position = position_dodge2(0.9)) +"
+"0","  scale_fill_viridis_d() +"
+"0","  labs(x=""State"") +"
+"0","  theme(legend.position = ""none"", axis.text.x = element_text(size = 9))"

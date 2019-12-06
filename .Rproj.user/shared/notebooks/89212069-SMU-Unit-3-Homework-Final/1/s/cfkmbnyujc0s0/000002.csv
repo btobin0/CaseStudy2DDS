@@ -1,0 +1,3 @@
+"0","fifaFiltered <- df %>%  select(Name, Position, Acceleration,Agility)%>%"
+"0","  filter(Position %in% c(""LM"",""LF""))"
+"0","fifaFiltered"

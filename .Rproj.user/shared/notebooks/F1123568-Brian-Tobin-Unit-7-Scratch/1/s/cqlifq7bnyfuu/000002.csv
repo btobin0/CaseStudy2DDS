@@ -1,0 +1,5 @@
+"0","titanicClean = titanic %>% filter(!is.na(Age) & !is.na(Pclass))"
+"0","set.seed(4)"
+"0","trainIndices = sample(seq(1:length(titanicClean$Age)),round(.7*length(titanicClean$Age)))"
+"0","trainTitanic = titanicClean[trainIndices,]"
+"0","testTitanic = titanicClean[-trainIndices,]"

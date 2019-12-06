@@ -1,0 +1,2 @@
+"0","plot(1:ks, colMeans(accuracies), type = ""b"", lwd=1, pch=19, col=""navy"", "
+"0","     xlab = ""Number of neighbours"", ylab = ""Accuracy"")"

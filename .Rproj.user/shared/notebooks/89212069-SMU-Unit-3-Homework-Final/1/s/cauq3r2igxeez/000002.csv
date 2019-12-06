@@ -1,0 +1,5 @@
+"0","fifa %>% "
+"0","  filter(Position == ""LF"" | Position == ""LM"") %>%"
+"0","  group_by(Position, Acceleration, Agility) %>%"
+"0","  summarize(meanAGG=mean(Agility,na.rm = TRUE),count=n()) %>%"
+"0","  print(n=28)"

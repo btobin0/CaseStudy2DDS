@@ -1,0 +1,206 @@
+---
+title: "BTobin-Unit-8-9-Scratch"
+author: "Brian Tobin"
+date: "October 9, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+#knitr::include_graphics("C:/Users/btobin/Documents/MDS-6306-Doing-Data-Science-Fall-2019/Unit 8 and 9 Case Study 1/Bud.PNG")
+```
+
+## R Markdown
+
+```{r library}
+library(png)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(e1071)
+library(caret)
+library(sf)
+library(dplyr)
+library(tidyverse)
+library(ggplot2) 
+ 
+
+
+
+```
+
+```{r directory}
+getwd()
+list.files()
+```
+
+
+
+## The Data
+```{r merge_data}
+# Reading in CSV data sets
+
+Beer <- read.csv(file = "Beers.csv",header=TRUE, sep=",",stringsAsFactors=FALSE)
+Brew <- read.csv(file= "Breweries.csv", header=TRUE, sep=",", stringsAsFactors=FALSE)
+head(Beer)
+head(Brew)
+```
+
+## Rename for merging
+
+```{r renaming Columns}
+# Next we rename  the brewery IDs, and merge the data
+beer <- Beer %>% rename(Brewery_ID=Brewery_id)
+brewery <- Brew %>% rename(Brewery_ID=Brew_ID)
+head(beer)
+head(brewery)
+```
+
+```{r Merging Files}
+beer <- beer %>% select(Name,Beer_ID,ABV,IBU,Style,Ounces,Brewery_ID)
+df <- merge(beer,brewery, by='Brewery_ID')
+head(df)
+```
+
+```{r Clean Up Columns}
+# Reordering the columns and give ourselves human readable names
+df <- df %>% 
+	rename(Beer_Name = Name.x) %>% 
+	rename(Brewery_Name = Name.y)
+nbd <- df %>% 
+	select(Beer_Name,Beer_ID,ABV,IBU,Style,Ounces,Brewery_Name,Brewery_ID,City,State)
+nbd
+```
+```{r remove missing values}
+summary(nbd)
+head(is.na(nbd))
+
+nbd[is.na(nbd)] <- 0
+summary(nbd)
+
+head(is.na(nbd))
+summary(nbd)
+```
+
+
+```{r median ABV and IBU by state}
+
+MaxByState <- as.data.frame(nbd 
+							  %>% group_by(State) 
+							  %>% summarise(maxABV = median(ABV, na.rm=TRUE),
+							  			  maxIBU = median(IBU, na.rm=TRUE),
+							  			  NumBreweries = n_distinct(Brewery_ID)))
+head(MaxByState)
+```
+
+```{r highest ABV}
+max(MaxByState$maxABV, na.rm=T)
+```
+
+```{r highest IBU}
+max(MaxByState$maxIBU, na.rm=T)
+```
+
+```{r Breweries by state}
+
+
+MaxByState <- as.data.frame(nbd 
+							  %>% group_by(State) 
+							  %>% summarise(NumBreweries = n_distinct(Brewery_ID)))
+head(MaxByState)
+```
+
+```{r data for scatterplot ABV and IBU}
+bplot <- nbd[,c('ABV','IBU')]
+print(head(bplot))
+```
+
+```{r facetwrap by state ibu}
+names(df)[names(df) == "name.x"] <- "beer_name"
+names(df)[names(df) == "name.y"] <- "brewery_name"
+ggplot(df, aes(x = IBU)) + geom_histogram(binwidth = 5, na.rm=TRUE) + facet_wrap(~State)
+```
+
+```{r facetwrap by state ABV}
+names(df)[names(df) == "name.x"] <- "beer_name"
+names(df)[names(df) == "name.y"] <- "brewery_name"
+ggplot(df, aes(x = ABV)) + geom_histogram(binwidth = 5, na.rm=TRUE) + facet_wrap(~State)
+```
+
+```{r scatterplot ABV and IBU}
+
+ggplot(df, aes(x = IBU, y = ABV)) + 
+  geom_point() +
+  stat_smooth(method = "aov", col = "red")+
+      labs(title="Fitted Regression Plot", 
+           subtitle="Assessment of relationship between ABV and IBU", 
+           caption="Source: IBU and ABV values are from 'beer and brewery' dataset") 
+```
+
+
+
+
+```{r get Beer_ID data}
+nbd$Beer_ID <- factor(nbd$Beer_ID)
+
+num.vars <- sapply(nbd, is.numeric)
+nbd[num.vars] <- lapply(nbd[num.vars], scale)
+
+myvars <- c("IBU","ABV")
+nbd.subset <- nbd[myvars]
+
+summary(nbd.subset)
+
+```
+
+```{r Counts Beers Per State}
+counts <- nbd %>%
+  group_by(State) %>%
+  summarise(counts = n())
+counts
+```
+
+
+```{r mean IBU vs ABV Comparison}
+abv_ibu2 =df %>%
+  group_by(State) %>%
+  summarise_at(vars("ABV", "IBU"), list(~ mean(., trim = .2), ~ median(., na.rm = TRUE)))
+View(abv_ibu2)
+```
+
+We can tell that for `ABV` that [MAX]Colorado (0.128) other states with high ABV:Kentucky (0.125), Indiana (0.120) and New York (0.100) are hte highest
+
+We can tell that for `IBU` that [MAX] Oregon (138) other states with high IBU: Virgina (135), Maine (130), Ohio (126).
+
+
+> 6.   Summary statistics for the ABV variable.
+
+```{r}
+print(sd(df$ABV, na.rm=TRUE))
+summary(df$ABV)
+```
+above are the summary statistics. we can see that there are 62 NAs and the standard deviation is 0.0135
+
+
+
+```{r}
+model = aov(ABV ~ IBU,data=df)
+summary(model) 
+```
+Utilizing the Anova variance F-test, for the `ABV ~ IBU` simple linear regression model, above provides sufficient evidence per the p-value <2e-16 indicating there is a relationship between `IBU` and `ABV`
+```{r Scatterplot by state}
+library(ggplot2)
+theme_set(theme_minimal())  
+ggplot(df, aes(x = IBU, y = ABV)) + 
+  geom_point(aes(col=State)) + 
+  geom_smooth(method="aov", col = "red", se=F) + 
+  xlim(c(0, 140)) + 
+  ylim(c(0.025, 0.13)) + 
+  labs(title="ABV & IBU Comparison", 
+           subtitle="Relationship between ABV and IBU",
+       caption="IBU and ABV values from Beer & Brewery dataset") 
+```
+
+
+

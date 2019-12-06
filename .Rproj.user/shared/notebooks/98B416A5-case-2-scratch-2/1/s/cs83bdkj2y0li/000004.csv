@@ -1,0 +1,6 @@
+"0","write.csv(TidyData2,'""C:/Users/btobin/Documents/case2/EmployeeData.csv', row.names = FALSE)
+"
+"2","cannot open file '""C:/Users/btobin/Documents/case2/EmployeeData.csv': Invalid argument"
+"2","Error in file(file, ifelse(append, ""a"", ""w"")) : 
+  cannot open the connection
+"

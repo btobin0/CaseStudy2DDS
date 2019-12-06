@@ -1,0 +1,4 @@
+"0","#dfa<-read.csv(""AllData.csv"",head=T)"
+"0","#dim(dfa)"
+"0","#head(dfa)"
+"0","#tail(dfa)"

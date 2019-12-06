@@ -1,0 +1,4 @@
+"0","ggplot(FinalDF, aes(Gender,Job_Satisfaction))+"
+"0","  ggtitle(""Average Gender vs Job Satisfaction via Salary"")+"
+"0","  geom_point(aes(color=Salary))+"
+"0","  scale_color_viridis(option=""D"")"

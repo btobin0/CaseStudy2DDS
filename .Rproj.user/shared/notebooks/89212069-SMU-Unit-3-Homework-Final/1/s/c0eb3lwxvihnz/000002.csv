@@ -1,0 +1,4 @@
+"0","fifaFiltered %>% group_by(Position) %>%"
+"0","  summarize(meanPOS = mean(Position), count=n())"
+"2","argument is not numeric or logical: returning NA"
+"2","argument is not numeric or logical: returning NA"

@@ -1,0 +1,5 @@
+"0","map_dbl(q2, ~is.na(.) %>% sum()) %>% "
+"0","  enframe(name = ""Variable"", value = ""# Missing"") %>%"
+"0","  arrange(-`# Missing`) %>%"
+"0","  kable(format=""html"", align=""lc"") %>%"
+"0","  kable_styling(full_width = F)"

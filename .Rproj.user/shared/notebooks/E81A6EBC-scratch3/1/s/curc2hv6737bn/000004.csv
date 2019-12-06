@@ -1,0 +1,4 @@
+"0","ggplot(FinalDF, aes(Gender,Role))+"
+"0","  ggtitle(""Gender vs Role via Job Satisfaction"")+"
+"0","  geom_point(aes(color=Job_Satisfaction))+"
+"0","  scale_color_viridis(option=""D"")"

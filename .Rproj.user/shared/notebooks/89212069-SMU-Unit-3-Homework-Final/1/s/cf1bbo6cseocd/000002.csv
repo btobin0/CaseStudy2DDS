@@ -1,0 +1,2 @@
+"0","fifa <- read.csv(file=""C:/Users/btobin/Documents/MDS-6306-Doing-Data-Science-Fall-2019/Unit 3/FIFA Players.csv"", stringsAsFactors = FALSE)"
+"0","head(fifa)"

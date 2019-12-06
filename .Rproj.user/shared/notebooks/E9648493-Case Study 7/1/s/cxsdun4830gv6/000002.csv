@@ -1,0 +1,4 @@
+"0","# Reading in CSV data sets"
+"0","Beer <- read.csv(file = ""Beers.csv"",header=TRUE, sep="","",stringsAsFactors=FALSE)"
+"0","Brew <- read.csv(file= ""Breweries.csv"", header=TRUE, sep="","", stringsAsFactors=FALSE)"
+"0","head(Beer)"

@@ -1,0 +1,4 @@
+"0","TidyData = Data %>% separate(BusinessTravel,c(""Travel"",""Frequency""))"
+"0","TidyData2 = TidyData %>% separate(JobRole,c(""Job_Category"",""Roll""))"
+"2","Expected 2 pieces. Missing pieces filled with `NA` in 51 rows [11, 26, 33, 39, 41, 44, 78, 90, 95, 97, 108, 112, 175, 177, 188, 212, 218, 235, 237, 242, ...]."
+"0","TidyData2"

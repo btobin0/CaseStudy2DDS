@@ -1,0 +1,6 @@
+"0","ggplot(df, aes(x = IBU, y = ABV)) + "
+"0","  geom_point() +"
+"0","  stat_smooth(method = ""aov"", col = ""red"")+"
+"0","      labs(title=""Fitted Regression Plot"", "
+"0","           subtitle=""Assessment of relationship between ABV and IBU"", "
+"0","           caption=""Source: IBU and ABV values are from 'beer and brewery' dataset"") "

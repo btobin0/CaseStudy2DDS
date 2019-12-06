@@ -1,0 +1,3 @@
+"0","fifa %>% select(Acceleration, Agility, Position) %>% filter( ggpairs)"
+"2","Error: Argument 2 filter condition does not evaluate to a logical vector
+"

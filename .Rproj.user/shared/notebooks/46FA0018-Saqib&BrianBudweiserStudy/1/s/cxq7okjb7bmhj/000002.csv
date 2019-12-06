@@ -1,0 +1,8 @@
+"0","Breweries = read_excel(""C:/Users/btobin/Documents/MDS-6306-Doing-Data-Science-Fall-2019/Unit 8 and 9 Case Study 1/Beers.xlsx"", sheet = 1)"
+"0","q2 = "
+"0","  left_join(Breweries, Beers, by = c(""Brewery_id"" = ""Brew_ID"")) %>%"
+"0","  rename(Beers=Name.x, Breweries=Name.y) %>%"
+"0","  select(Beer_ID, Beers, Brewery_id, Breweries, everything())"
+"0","head(q2, 6) %>%"
+"0","  kable(format=""html"", align=""clclcclcll"", digits=2, caption=""First six"") %>%"
+"0","  kable_styling(full_width = F)"

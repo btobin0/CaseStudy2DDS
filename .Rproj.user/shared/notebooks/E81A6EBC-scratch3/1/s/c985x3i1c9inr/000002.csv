@@ -1,0 +1,3 @@
+"0","#dfa2 <- dfa %>% separate(BusinessTravel, "
+"0","#                c(""Travel"", ""Frequency""))"
+"0","#write.csv(dfa2,""C:/Users/btobin/Documents/case2/AllData2.csv"")"

@@ -1,0 +1,6 @@
+"0","tibble("
+"0","  Stats = summary(q2$ABV) %>% names(),"
+"0","  Values = summary(q2$ABV) %>% as.vector()"
+"0","  ) %>%"
+"0","  kable(format=""html"", align=""lc"", digits=3) %>%"
+"0","  kable_styling(full_width = F)"

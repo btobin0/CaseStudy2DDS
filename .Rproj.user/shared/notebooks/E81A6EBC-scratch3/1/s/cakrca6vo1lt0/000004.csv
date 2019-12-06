@@ -1,0 +1,4 @@
+"0","FinalDF %>% "
+"0","  ggplot(aes(Age, ..density..)) +"
+"0","  geom_histogram(fill=""white"", color=""darkred"", bins = 25) +"
+"0","  geom_density(color=""navy"", size=0.5, kernel = ""epanechnikov"") "

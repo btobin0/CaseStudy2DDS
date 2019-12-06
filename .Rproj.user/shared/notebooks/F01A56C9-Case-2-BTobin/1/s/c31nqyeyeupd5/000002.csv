@@ -1,0 +1,5 @@
+"0","rmse(JobSatisfaction, MonthlyIncome, na.rm=TRUE, ...)
+"
+"2","Error in rmse(JobSatisfaction, MonthlyIncome, na.rm = TRUE, ...) : 
+  could not find function ""rmse""
+"

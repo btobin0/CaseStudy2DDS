@@ -1,0 +1,3 @@
+"0","FinalDF<-read.csv(""AllData3.csv"",head=T)"
+"0","FinalDF = subset(FinalDF,select=-c(X))"
+"0","head(FinalDF)"

@@ -1,0 +1,6 @@
+"0","MaxByState <- as.data.frame(nbd "
+"0","							  %>% group_by(State) "
+"0","							  %>% summarise(maxABV = median(ABV, na.rm=TRUE),"
+"0","							  			  maxIBU = median(IBU, na.rm=TRUE),"
+"0","							  			  NumBreweries = n_distinct(Brewery_ID)))"
+"0","head(MaxByState)"

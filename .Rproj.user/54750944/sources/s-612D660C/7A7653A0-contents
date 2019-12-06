@@ -1,0 +1,162 @@
+---
+title: "Scratch"
+author: "Brian Tobin"
+date: "November 18, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(tidyr)
+library(tidyverse)
+library(dplyr)
+library(kableExtra)
+library(magrittr)
+library(readxl)
+library(ggpmisc)
+library(class)
+library(caret)
+library(ggplot2)
+```
+
+```{r}
+list.files()
+```
+
+```{r}
+Data <- read.csv(file="CaseStudy2-data.csv")
+
+glimpse(Data)
+head(Data)
+```
+
+
+
+```{r}
+TidyData = Data %>% separate(BusinessTravel,c("Travel","Frequency"))
+TidyData2 = TidyData %>% separate(JobRole,c("Job_Category","Role"))
+TidyData2
+```
+
+```{R}
+#write.csv(TidyData2,file = "NewCaseStudy2-data.csv")
+NTD <- read.csv(file="NewCaseStudy4-data.csv")
+head(NTD)
+```
+
+
+
+```{r}
+# Gather data to be analyzed
+TestD = 
+  NTD %>%
+  select(Age,JobLevel,JobSatisfaction,TotalWorkingYears,YearsSinceLastPromotion,MonthlyIncome,Title) %>%
+  na.omit() #knn function does not accept missing values
+
+# Train and Test Data
+r = nrow(TestD)
+p = 0.75 
+n = as.integer(p*r)
+set.seed(198)
+iterations = 100
+ks = 25
+accuracies = matrix(nrow = iterations, ncol = ks)
+set.seed(100)
+myseeds = runif(iterations) %>% multiply_by(10) %>% round()
+
+for(j in 1:iterations)
+{
+  set.seed(myseeds[j])
+  index = sample(1:r, n, replace = F)
+  test.data = TestD[index,] 
+  train.data = TestD[-index,]
+  for(i in 1:ks)
+  {
+    knn(
+      train = train.data %>% select(TotalWorkingYears,YearsSinceLastPromotion), 
+      test = test.data %>% select(TotalWorkingYears,YearsSinceLastPromotion), 
+      cl = train.data %$% JobSatisfaction, 
+      k = i, prob = F
+      ) -> knn_v0
+    confMat = confusionMatrix(table(knn_v0, test.data$JobSatisfaction))
+    accuracies[j,i] = confMat$overall[1]
+  }
+}
+
+
+```
+
+
+
+
+```{r}
+plot(1:ks, colMeans(accuracies), type = "b", lwd=1, pch=19, col="navy", 
+     xlab = "Number of neighbours", ylab = "Accuracy")
+abline(v = 13, col="red")
+abline(h = colMeans(accuracies)[13], col="red")
+
+avg_acc = colMeans(accuracies)[13]
+```
+
+```{r}
+rmse(JobSatisfaction, MonthlyIncome, na.rm=TRUE, ...)
+```
+
+
+
+```{r}
+# Gather data to be analyzed
+TestD2 = 
+  NTD %>%
+  select(Age,JobLevel,JobSatisfaction,MonthlyIncome,Title) %>%
+  na.omit() #knn function does not accept missing values
+
+# Train and Test Data
+r = nrow(TestD)
+p = 0.75 
+n = as.integer(p*r)
+set.seed(198)
+iterations = 100
+ks = 25
+accuracies = matrix(nrow = iterations, ncol = ks)
+set.seed(100)
+myseeds = runif(iterations) %>% multiply_by(10) %>% round()
+
+for(j in 1:iterations)
+{
+  set.seed(myseeds[j])
+  index = sample(1:r, n, replace = F)
+  test.data = TestD[index,] 
+  train.data = TestD[-index,]
+  for(i in 1:ks)
+  {
+    knn(
+      train = train.data %>% select(MonthlyIncome,JobSatisfaction), 
+      test = test.data %>% select(MonthlyIncome,JobSatisfaction), 
+      cl = train.data %$% MonthlyIncome, 
+      k = i, prob = F
+      ) -> knn_v0
+    confMat = confusionMatrix(table(knn_v0, test.data$MonthlyIncome))
+    accuracies[j,i] = confMat$overall[1]
+  }
+}
+
+
+```
+
+
+
+```{r}
+plot(1:ks, colMeans(accuracies), type = "b", lwd=1, pch=19, col="navy", 
+     xlab = "Number of neighbours", ylab = "Accuracy")
+abline(v = 13, col="red")
+abline(h = colMeans(accuracies)[13], col="red")
+
+avg_acc = colMeans(accuracies)[13]
+```
+

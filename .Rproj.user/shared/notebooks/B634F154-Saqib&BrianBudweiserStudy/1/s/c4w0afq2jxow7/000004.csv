@@ -1,0 +1,4 @@
+"0","lm(ABV ~ IBU, data = q2) %>% summary() %$%"
+"0","  coefficients %>%"
+"0","  kable(format=""html"", align=""lc"", digits=4, row.names=T) %>%"
+"0","  kable_styling(full_width = F)"

@@ -1,0 +1,168 @@
+---
+title: "SMU-Unit-3-Homework-1"
+author: "Brian Tobin"
+date: "September 6, 2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r first library set}
+library(tidyr)
+library(ggplot2)
+library(dplyr)
+library(GGally)
+```
+
+```{r sessionInfo}
+sessionInfo()
+```
+
+```{r Load DataSet}
+fifa <- read.csv(file="C:/Users/btobin/Documents/MDS-6306-Doing-Data-Science-Fall-2019/Unit 3/FIFA Players.csv", stringsAsFactors = FALSE)
+
+head(fifa)
+
+df <- data.frame(fifa)
+head(df)
+```
+
+```{r Part-1: Filter Dataset to LF and LM}
+fifaFiltered <- df %>%  select(Name, Position, Acceleration,Agility)%>%
+  filter(Position %in% c("LM","LF"))
+
+fifaFiltered
+```
+
+
+# Comment on Above Data Graph
+## There is enough evidence to suggest that Mid-Field Players have a slight advantage over the Left Forward Players. In some instances in a short run, the Left Forward has an advantage.
+#
+
+```{r Part-4: 6-Step t-test 1}
+
+fifaFiltered %>% group_by(Position) %>%
+  summarize(meanPOS = mean(Position), count=n())
+
+```
+
+```{r Part-4: 6-Step t-test 2}
+
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position, Acceleration, Agility) %>%
+  summarize(meanPOS = mean(Position), count=n())
+
+
+```
+
+```{r Part-4: 6-Step t-test 3}
+
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position, Acceleration, Agility) %>%
+  ggplot(aes(x=Acceleration,y=Agility))+
+  geom_bar(stat="identity")
+
+
+```
+
+```{r Part-4: 6-Step t-test 4}
+
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position, Acceleration, Agility) %>%
+  summarize(meanACC=mean(Acceleration),count=n())
+
+
+```
+
+```{r Part-4: 6-Step t-test 5}
+
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position, Acceleration, Agility) %>%
+  summarize(meanACC=mean(Acceleration,na.rm = TRUE),count=n()) %>%
+  print(n=28)
+
+
+```
+
+```{r Part-4: 6-Step t-test 6}
+
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position, Acceleration, Agility) %>%
+  summarize(meanAGG=mean(Agility,na.rm = TRUE),count=n()) %>%
+  print(n=28)
+
+
+```
+
+```{r Part-4: 6-Step t-test 7}
+
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position, Acceleration, Agility) %>%
+  summarize(meanAGG=mean(Agility),count=n()) %>%
+  ggplot(aes(x=Position,y=Agility))+
+  geom_col()
+
+
+```
+
+```{r Part-4: 6-Step t-test 8}
+
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position, Acceleration, Agility) %>%
+  summarize(meanACC=mean(Acceleration),count=n()) %>%
+  ggplot(aes(x=Position,y=Acceleration))+
+  geom_col()
+
+
+```
+
+```{r}
+
+fifa %>% select(Acceleration, Agility, Position) %>% filter( ggpairs)
+```
+
+```{r Part-4: 6-Step t-test 9}
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position) %>%
+  summarize(meanACC=mean(Acceleration),count=n()) %>%
+  arrange(meanACC)%>%
+  print(n=28)
+
+
+```
+
+```{r Part-4: 6-Step t-test 10}
+fifa %>% 
+  filter(Position == "LF" | Position == "LM") %>%
+  group_by(Position) %>%
+  summarize(meanAGG=mean(Agility),count=n()) %>%
+  arrange(meanAGG)%>%
+  print(n=28)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+

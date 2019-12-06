@@ -1,0 +1,4 @@
+"0","counts <- nbd %>%"
+"0","  group_by(State) %>%"
+"0","  summarise(counts = n())"
+"0","counts"

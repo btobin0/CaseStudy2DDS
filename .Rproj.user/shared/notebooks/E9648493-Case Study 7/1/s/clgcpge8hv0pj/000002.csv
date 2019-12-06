@@ -1,0 +1,7 @@
+"0","# Reordering the columns and give ourselves human readable names"
+"0","df <- df %>% "
+"0","	rename(Beer_Name = Name.x) %>% "
+"0","	rename(Brewery_Name = Name.y)"
+"0","nbd <- df %>% "
+"0","	select(Beer_Name,Beer_ID,ABV,IBU,Style,Ounces,Brewery_Name,Brewery_ID,City,State)"
+"0","nbd"

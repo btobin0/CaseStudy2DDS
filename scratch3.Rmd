@@ -1,0 +1,330 @@
+---
+title: "scratch3"
+author: "Brian Tobin"
+date: "December 2, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+```{r}
+library(tidyr)
+library(GGally)
+library(tidyverse)
+library(dplyr)
+library(kableExtra)
+library(magrittr)
+library(readxl)
+library(ggpmisc)
+library(class)
+library(caret)
+library(ggplot2)
+library(viridis)
+library(neuralnet)
+library(Metrics)
+library(sklean)
+library(naivebayes)
+library(e1071)
+```
+
+```{r}
+list.files()
+```
+
+```{r}
+#df1<-read.csv("CaseStudy2CompSetNoAttrition.csv",head=T)
+#head(df1)
+#df2<-read.csv("CaseStudy2CompSetNoSalary.csv",head=T)
+#head(df2)
+```
+
+```{r}
+#dim(df1)
+#dim(df2)
+#str(df1)
+#str(df2)
+```
+
+```{r}
+#df1$Attrition <-0
+#str(df1)
+#head(df1)
+#dim(df1)
+```
+
+```{r}
+#df2$Salary <-0
+#str(df2)
+#head(df2)
+#dim(df2)
+```
+
+```{r}
+#AllData <-merge(df2,df1, all.x=TRUE, all.y=TRUE)
+#dim(AllData)
+#head(AllData)
+#tail(AllData)
+```
+
+```{r}
+#write.csv(AllData,"C:/Users/btobin/Documents/case2/AllData.csv")
+```
+
+```{r}
+#dfa<-read.csv("AllData.csv",head=T)
+#dim(dfa)
+#head(dfa)
+#tail(dfa)
+```
+
+```{r}
+#dfa$Salary <- NULL
+#head(dfa)
+```
+
+```{r}
+#dfa$Salary <- dfa$MonthlyRate * 12
+#head(dfa)
+```
+
+```{r}
+#dfa2 <- dfa %>% separate(BusinessTravel, 
+#                c("Travel", "Frequency"))
+#write.csv(dfa2,"C:/Users/btobin/Documents/case2/AllData2.csv")
+
+```
+
+```{r}
+#dfa3 <- dfa2 %>% separate(JobRole, 
+#                c("Job", "Role"))
+#write.csv(dfa3,"C:/Users/btobin/Documents/case2/AllData3.csv")
+
+```
+
+```{r}
+FinalDF<-read.csv("AllData3.csv",head=T)
+FinalDF = subset(FinalDF,select=-c(X))
+
+head(FinalDF)
+tail(FinalDF)
+```
+
+```{r}
+hist(FinalDF$JobSatisfaction)
+hist(FinalDF$MonthlyRate)
+hist(FinalDF$Salary)
+hist(FinalDF$YearsSinceLastPromotion)
+hist(FinalDF$YearsWithCurrManager)
+```
+
+
+
+```{r}
+point<-ggplot(FinalDF, aes(x=Age,y=Salary, color=YearsSinceLastPromotion)) +
+  geom_point()
+point
+```
+
+```{r}
+set.seed(100)
+x <- rnorm(100)
+bins=30
+
+hist<-qplot(x=FinalDF$YearsInCurrentRole,y=FinalDF$YearsSinceLastPromotion,color=FinalDF$Age) +
+  geom_point()
+hist
+
+```
+
+```{r}
+hist+scale_fill_gradientn(colours=rainbow(2))
+```
+
+```{r}
+ggplot(FinalDF, aes(YearsWithCurrManager,YearsSinceLastPromotion))+
+  ggtitle("Average Years With Current Manager vs Years Since Last Promotion")+
+  geom_point(aes(color=Age))+
+  scale_color_viridis(option="D")
+
+```
+
+```{r}
+ggplot(FinalDF, aes(YearsInCurrentRole,YearsSinceLastPromotion))+
+  ggtitle("Average Years in Current Role vs Years Since Last Promotion")+
+  geom_point(aes(color=YearsSinceLastPromotion))+
+  scale_color_viridis(option="D")
+
+```
+
+```{r}
+ggplot(FinalDF, aes(Role,YearsSinceLastPromotion))+
+  ggtitle("Average Role vs Years Since Last Promotion via Age")+
+  geom_point(aes(color=Age))+
+  scale_color_viridis(option="D")
+
+```
+
+```{r}
+ggplot(FinalDF, aes(Role,YearsAtCompany))+
+  ggtitle("Years in Current Role vs Job Satisfaction")+
+  geom_point(aes(color=Job_Satisfaction))+
+  scale_color_viridis(option="D")
+
+```
+
+```{r}
+ggplot(FinalDF, aes(Gender,Role))+
+  ggtitle("Average Gender vs Role via Job Satisfaction")+
+  geom_point(aes(color=Job_Satisfaction))+
+  scale_color_viridis(option="D")
+
+```
+
+```{r}
+ggplot(FinalDF, aes(Gender,Job_Satisfaction))+
+  ggtitle("Average Gender vs Job Satisfaction via Salary")+
+  geom_point(aes(color=Salary))+
+  scale_color_viridis(option="D")
+
+```
+
+
+
+
+
+
+```{r}
+ggplot(FinalDF, aes(Age,YearsAtCompany))+
+  geom_point(aes(color=YearsSinceLastPromotion))+
+  geom_smooth(aes(color=YearsSinceLastPromotion,fill=YearsSinceLastPromotion), method ="lm")+
+  scale_color_viridis(option="D")
+  scale_fill_viridis(option="D")
+  
+ggplot(FinalDF, aes(Age,YearsAtCompany))+
+  geom_point(aes(color=PerformanceRating))+
+  geom_smooth(aes(color=PerformanceRating,fill=PerformanceRating), method ="lm")+
+  scale_color_viridis(option="D")
+  scale_fill_viridis(option="D")
+  
+ggplot(FinalDF, aes(Gender,YearsAtCompany))+
+    ggtitle("Average Gender vs Years At Company via Job Satisfaction")+
+    geom_point(aes(color=JobSatisfaction))+
+    geom_smooth(aes(color=JobSatisfaction,fill=JobSatisfaction), method ="lm")+
+    scale_color_viridis(option="D") +
+    scale_fill_viridis(option="D")  
+
+ggplot(FinalDF, aes(JobSatisfaction,YearsAtCompany))+
+  geom_point(aes(color=MonthlyRate))+
+  geom_smooth(aes(color=MonthlyRate,fill=MonthlyRate), method ="lm")+
+  scale_color_viridis(option="D")
+  scale_fill_viridis(option="D")  
+```
+
+```{r}
+
+  ggplot(FinalDF, aes(YearsAtCompany,Attrition, fill=Age)) +
+      ggtitle("Attrition vs Years At Company via Age")+
+    geom_bar(stat = "identity", position = position_dodge2(0.9)) +
+    scale_color_viridis_d() +
+    scale_fill_viridis(option="D")
+
+ggplot(FinalDF, aes(Age,JobSatisfaction, fill=YearsSinceLastPromotion))+
+  geom_bar(stat = "identity", position = position_dodge2(0.9)) +
+  scale_color_viridis_d()
+  scale_fill_viridis(option="D")
+  
+ggplot(FinalDF, aes(Age,JobSatisfaction, fill=YearsAtCompany))+
+  geom_bar(stat = "identity", position = position_dodge2(0.9)) +
+  scale_color_viridis_d()
+  scale_fill_viridis(option="D")
+  
+  ggplot(FinalDF, aes(Salary,Attrition, fill=Salary)) +
+          ggtitle("Salary vs Attrition")+
+    geom_bar(stat = "identity", position = position_dodge2(0.9)) +
+    scale_color_viridis_d() +
+    scale_fill_viridis(option="D")
+```
+
+```{r}
+tibble(
+  Stats = summary(FinalDF$Age) %>% names(),
+  Satisfaction = summary(FinalDF$JobSatisfaction),
+  Monthly_Rate = summary(FinalDF$MonthlyRate) %>% as.vector()
+  ) 
+
+FinalDF %>% 
+  ggplot(aes(Age, ..density..)) +
+  geom_histogram(fill="white", color="darkred", bins = 25) +
+  geom_density(color="navy", size=0.5, kernel = "epanechnikov") 
+
+FinalDF %>% 
+  ggplot(aes(JobSatisfaction, ..density..)) +
+  geom_histogram(fill="white", color="darkred", bins = 25) +
+  geom_density(color="navy", size=0.5, kernel = "epanechnikov") 
+
+
+```
+
+```{r}
+formula <- as.formula(y ~ x)
+FinalDF %>%
+  ggplot(aes(Age, YearsAtCompany)) +
+  geom_point(color="blue", alpha=0.3) +
+  geom_smooth(formula = formula, method = "lm", color="darkred") +
+  stat_poly_eq(aes(label = paste(..eq.label.., ..rr.label.., sep = "~~~")), 
+                   formula = formula, parse = TRUE, na.rm = T) 
+
+```
+
+```{r}
+Age <- FinalDF$Age
+Monthly_Income <- FinalDF$MonthlyIncome
+Years_At_Company <- FinalDF$YearsAtCompany
+Job_Satisfaction <- FinalDF$JobSatisfaction
+Years_Since_Last_Promotoion <- FinalDF$YearsSinceLastPromotion
+df <- data.frame(Age,Monthly_Income,Years_At_Company,Job_Satisfaction,Years_Since_Last_Promotoion)
+
+nn=neuralnet(Age~Years_At_Company+Monthly_Income+Job_Satisfaction+Years_Since_Last_Promotoion,data=df,hidden=4,4,act.fct = "logistic",
+             linear.output = FALSE)
+nn$result.matrix
+plot(nn)
+```
+
+```{r}
+Predict=compute(nn,df)
+
+head(Predict$net.result)
+```
+
+```{r}
+ggpairs(df)
+```
+
+
+
+```{r}
+set.seed(100)
+dt = sort(sample(nrow(FinalDF), nrow(FinalDF)*.7))
+train<-FinalDF[dt,]
+test<-FinalDF[-dt,]
+
+set.seed(3456)
+trainIndex <- createDataPartition(FinalDF$Salary, p = .7,
+                                  list = FALSE,
+                                  times = 1)
+Train <- FinalDF[ trainIndex,]
+Valid <- FinalDF[-trainIndex,]
+
+model <- naiveBayes(Monthly_Income ~ ., data = df)
+predict(model,df,type="raw")
+```
+
+
+
+
+
+

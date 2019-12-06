@@ -1,0 +1,5 @@
+"0","tibble("
+"0","  Stats = summary(FinalDF$Age) %>% names(),"
+"0","  Satisfaction = summary(FinalDF$JobSatisfaction),"
+"0","  Monthly_Rate = summary(FinalDF$MonthlyRate) %>% as.vector()"
+"0","  ) "

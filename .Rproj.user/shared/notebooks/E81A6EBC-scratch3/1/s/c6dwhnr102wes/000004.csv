@@ -1,0 +1,7 @@
+"0","formula <- as.formula(y ~ x)"
+"0","FinalDF %>%"
+"0","  ggplot(aes(Age, YearsAtCompany)) +"
+"0","  geom_point(color=""blue"", alpha=0.3) +"
+"0","  geom_smooth(formula = formula, method = ""lm"", color=""darkred"") +"
+"0","  stat_poly_eq(aes(label = paste(..eq.label.., ..rr.label.., sep = ""~~~"")), "
+"0","                   formula = formula, parse = TRUE, na.rm = T) "

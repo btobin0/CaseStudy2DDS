@@ -1,0 +1,2 @@
+"0","titanic <- read.csv(file=""titanic.csv"", header=TRUE, sep="","")"
+"0","head(titanic)"

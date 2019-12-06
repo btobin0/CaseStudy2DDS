@@ -1,0 +1,8 @@
+"0","Beers = read_excel(""C:/Users/btobin/Documents/MDS-6306-Doing-Data-Science-Fall-2019/Unit 8 and 9 Case Study 1/Beers.xlsx"", sheet = 2)"
+"0","Beers %>% "
+"0","  dplyr::count(State) %>% "
+"0","  mutate(Pct = 100*n/sum(n)) %>%"
+"0","  rename(Count = n) %>%"
+"0","  arrange(Count) -> q1"
+"0","kable(q1, format = ""html"", align = ""lcc"", digits = 2) %>%"
+"0","  kableExtra::kable_styling(full_width = F)"

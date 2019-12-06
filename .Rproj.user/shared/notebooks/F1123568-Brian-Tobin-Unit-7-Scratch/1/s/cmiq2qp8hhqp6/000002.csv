@@ -1,0 +1,7 @@
+"0","library(ggplot2)"
+"0","testTitanic %>% "
+"0","  select(Pclass,Age) %>% "
+"0","  gather(metric, value) %>% "
+"0","  ggplot(aes(value, fill = metric)) + "
+"0","  geom_density(show.legend = FALSE) + "
+"0","  facet_wrap(~ metric, scales = ""free"")"

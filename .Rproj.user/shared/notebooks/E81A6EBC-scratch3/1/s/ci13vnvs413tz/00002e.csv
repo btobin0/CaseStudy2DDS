@@ -1,0 +1,5 @@
+"0","  ggplot(FinalDF, aes(YearsAtCompany,Attrition, fill=Age)) +"
+"0","      ggtitle(""Attrition vs Years At Company via Age"")+"
+"0","    geom_bar(stat = ""identity"", position = position_dodge2(0.9)) +"
+"0","    scale_color_viridis_d() +"
+"0","    scale_fill_viridis(option=""D"")"

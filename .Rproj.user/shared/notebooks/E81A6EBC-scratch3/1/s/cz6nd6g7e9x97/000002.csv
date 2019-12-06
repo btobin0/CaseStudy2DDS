@@ -1,0 +1,6 @@
+"0","set.seed(100)"
+"0","x <- rnorm(100)"
+"0","bins=30"
+"0","hist<-qplot(x=FinalDF$YearsInCurrentRole,y=FinalDF$YearsSinceLastPromotion,color=FinalDF$Age) +"
+"0","  geom_point()"
+"0","hist"

@@ -1,0 +1,3 @@
+"0","#write.csv(TidyData2,file = ""NewCaseStudy2-data.csv"")"
+"0","NTD <- read.csv(file=""NewCaseStudy4-data.csv"")"
+"0","head(NTD)"

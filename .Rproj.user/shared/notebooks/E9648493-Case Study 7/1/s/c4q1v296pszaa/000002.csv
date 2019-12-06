@@ -1,0 +1,4 @@
+"0","# Next we rename  the brewery IDs, and merge the data"
+"0","beer <- Beer %>% rename(Brewery_ID=Brewery_id)"
+"0","brewery <- Brew %>% rename(Brewery_ID=Brew_ID)"
+"0","head(beer)"

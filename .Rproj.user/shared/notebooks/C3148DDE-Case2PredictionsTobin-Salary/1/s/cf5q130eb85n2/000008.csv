@@ -1,0 +1,4 @@
+"0","ggplot(FinalDF, aes(JobSatisfaction,YearsAtCompany))+"
+"0","  geom_point(aes(color=MonthlyRate))+"
+"0","  geom_smooth(aes(color=MonthlyRate,fill=MonthlyRate), method =""lm"")+"
+"0","  scale_color_viridis(option=""D"")"

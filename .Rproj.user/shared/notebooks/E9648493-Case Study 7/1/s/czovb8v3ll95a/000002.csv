@@ -1,0 +1,4 @@
+"0","abv_ibu2 =df %>%"
+"0","  group_by(State) %>%"
+"0","  summarise_at(vars(""ABV"", ""IBU""), list(~ mean(., trim = .2), ~ median(., na.rm = TRUE)))"
+"0","View(abv_ibu2)"
